@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -12,9 +13,10 @@ public class PlayerMovements : NetworkBehaviour
         access layerMask
 
         for moving the player
-        for appling physics
+        
 
      */
+
 
     // movement
     CharacterController controller;
@@ -26,32 +28,30 @@ public class PlayerMovements : NetworkBehaviour
     [SerializeField] float movementsSpead = 12f;
     [SerializeField] Vector2 spawnRange = new Vector2(-10, 10);
     [SerializeField] float gravity = -20;
-    [SerializeField] float jumpForece = 8f;
 
-    //jumping
-    Transform groundCheck;
-    [SerializeField] LayerMask environmentMask;
-    float groundDistance = 0.4f;
-    //NetworkVariable<bool> isGrounded;
 
-    void Start()
+    // animation
+    NetworkVariable<PlayerState> playerState = new NetworkVariable<PlayerState>();
+    private Animator animator;
+
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
 
-        groundCheck = transform.Find("groundCheck").GetComponent<Transform>();
+        animator = transform.Find("Model").GetComponent<Animator>();
+    }
+    void Start()
+    {
+        if(IsClient && IsOwner)
+        {
+            transform.position = new Vector3(Random.Range(spawnRange.x, spawnRange.y), 0, Random.Range(spawnRange.x, spawnRange.y));
 
-        transform.position = new Vector3(Random.Range(spawnRange.x, spawnRange.y), 0, Random.Range(spawnRange.x, spawnRange.y));
+        }
 
     }
 
     void Update()
     {
-        //isGrounded.Value = Physics.CheckSphere(groundCheck.position, groundDistance, environmentMask);
-
-        //if (isGrounded.Value && velocity.y < 0)
-        //{
-        //    velocity.y = -2f;
-        //}
 
         if (IsServer)
         {
@@ -60,17 +60,15 @@ public class PlayerMovements : NetworkBehaviour
 
         if (IsClient && IsOwner)
         {
-            UpdateClient();
+            ClientInput();
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        ClientVisuals();
 
-        controller.Move(velocity * Time.deltaTime);
+        velocity.y += gravity;
 
-        //if (Input.GetButtonDown("Jump") && isGrounded.Value)
-        //{
-        //    velocity.y = jumpForece;
-        //}
+        controller.Move(velocity);
+
     }
 
     void UpdateServer()
@@ -79,13 +77,21 @@ public class PlayerMovements : NetworkBehaviour
 
         controller.Move(move * movementsSpead * Time.deltaTime);
     }
-    void UpdateClient()
+    void ClientInput()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        Vector3 move = transform.right * x + transform.forward * z;
 
         UpdateClientPositionServerRpc(x,z);
+
+        if(x !=0 || z != 0)
+        {
+            UpdatePlayerStateServerRpc(PlayerState.Walk);
+        }
+        else
+        {
+            UpdatePlayerStateServerRpc(PlayerState.Idle);
+        }
     }
 
     [ServerRpc]
@@ -93,5 +99,23 @@ public class PlayerMovements : NetworkBehaviour
     {
         xPosition.Value = x;
         zPosition.Value = z;
+    }
+
+    void ClientVisuals()
+    {
+        if(playerState.Value == PlayerState.Walk)
+        {
+            animator.SetBool("walking", true);
+        }
+        else if(playerState.Value == PlayerState.Idle)
+        {
+            animator.SetBool("walking", false);
+        }
+    }
+
+    [ServerRpc]
+    public void UpdatePlayerStateServerRpc(PlayerState state)
+    {
+        playerState.Value = state;
     }
 }
