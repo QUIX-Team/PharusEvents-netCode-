@@ -7,7 +7,10 @@ public class PlayerMovements : NetworkBehaviour
     /*
         used in the player
     
-        access PlayerCameraFollow (Singlton)
+        access movementsSpead
+        access gravity (local)
+        access jumpForce
+        access layerMask
 
         for moving the player
         
@@ -36,8 +39,6 @@ public class PlayerMovements : NetworkBehaviour
         controller = GetComponent<CharacterController>();
 
         animator = transform.Find("Model").GetComponent<Animator>();
-
-        
     }
     void Start()
     {
@@ -45,7 +46,6 @@ public class PlayerMovements : NetworkBehaviour
         {
             transform.position = new Vector3(Random.Range(spawnRange.x, spawnRange.y), 0, Random.Range(spawnRange.x, spawnRange.y));
 
-            PlayerCameraFollow.Instance.FollowPlayer(transform.Find("CameraRoot"));
         }
 
     }
@@ -65,7 +65,7 @@ public class PlayerMovements : NetworkBehaviour
 
         ClientVisuals();
 
-        velocity.y = gravity;
+        velocity.y += gravity;
 
         controller.Move(velocity);
 
