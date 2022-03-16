@@ -15,7 +15,8 @@ public class BodyRotation : NetworkBehaviour
 
     private Transform playerBody;
 
-    NetworkVariable<float> LocalRotaion;
+    NetworkVariable<float> LocalRotaion = new NetworkVariable<float>();
+    InputManager inputManager = InputManager.Instance;
 
     void Awake()
     {
@@ -38,7 +39,8 @@ public class BodyRotation : NetworkBehaviour
 
     void ClientInput()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        //float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseX = inputManager.GetPlayerMouseDelta().x;
 
         UpdateClientRotationServerRpc(mouseX);
 

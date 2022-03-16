@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 514029731258163212}
   - component: {fileID: 514029731258163215}
   - component: {fileID: 514029731258163213}
-  - component: {fileID: 124878149083334495}
+  - component: {fileID: -3142706720821455148}
   m_Layer: 0
   m_Name: MainCamira
   m_TagString: Untagged
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aee518c67d4a0b409e9737a5ab8b77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &124878149083334495
+--- !u!114 &-3142706720821455148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,11 +178,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 514029731258163211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdff9acf58545424a9ef086a0db7acfc, type: 3}
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampAngel: 80
-  rotationSpeed: 10
+  PlayerIndex: -1
+  XYAxis: {fileID: 1086547713790386598, guid: a3c364c4c7929384ba46c0c6a2f3b3e3, type: 3}
+  ZAxis: {fileID: 0}
 --- !u!1 &514029732357486519
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,8 +257,8 @@ MonoBehaviour:
   m_RecenterTarget: 0
   m_VerticalAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_SpeedMode: 1
+    m_MaxSpeed: 0.2
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -280,8 +281,8 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_SpeedMode: 1
+    m_MaxSpeed: 0.4
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 

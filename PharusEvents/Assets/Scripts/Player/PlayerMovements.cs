@@ -45,7 +45,7 @@ public class PlayerMovements : NetworkBehaviour
         {
             transform.position = new Vector3(Random.Range(spawnRange.x, spawnRange.y), 0, Random.Range(spawnRange.x, spawnRange.y));
 
-            PlayerCameraFollow.Instance.FollowPlayer(transform.Find("CameraRoot"));
+            PlayerCameraFollow.Instance.FollowPlayer(transform.Find("CameraRoot"), transform.Find("LookAtTarget"));
         }
 
     }

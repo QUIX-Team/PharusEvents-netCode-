@@ -19,6 +19,7 @@ public class PlayerController : NetworkBehaviour
     private Animator animator;
 
     private InputManager inputManager;
+    private Transform cameraTransform;
 
     void Awake()
     {
@@ -32,11 +33,13 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
+        cameraTransform = GameObject.Find("MainCamira").transform;
+
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(spawnRange.x, spawnRange.y), 0, Random.Range(spawnRange.x, spawnRange.y));
 
-            PlayerCameraFollow.Instance.FollowPlayer(transform.Find("CameraRoot"));
+            PlayerCameraFollow.Instance.FollowPlayer(transform.Find("CameraRoot"), transform.Find("LookAtTarget"));
         }
 
     }
@@ -91,12 +94,11 @@ public class PlayerController : NetworkBehaviour
     private void UpdateServer()
     {
         Vector3 move = new Vector3(xPosition.Value,0,zPosition.Value);
+
+        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+        move.y = 0;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
 
 
     }

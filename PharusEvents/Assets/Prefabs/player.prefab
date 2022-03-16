@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3357664851497987276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496929835216734748}
+  m_Layer: 0
+  m_Name: LookAtTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496929835216734748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357664851497987276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07385063, y: 0.71, z: 1.539}
+  m_LocalScale: {x: 0.12015, y: 0.12015, z: 0.12015}
+  m_Children: []
+  m_Father: {fileID: 7242473336812343395}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7198187048733990446
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: player info
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -248,6 +278,7 @@ GameObject:
   - component: {fileID: -5508957885804861905}
   - component: {fileID: 4116931413108115990}
   - component: {fileID: -7499812040938845363}
+  - component: {fileID: 8524198668353957572}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -269,6 +300,7 @@ Transform:
   - {fileID: 2814435488217219931}
   - {fileID: 143303242756171792}
   - {fileID: 7383783197398426834}
+  - {fileID: 496929835216734748}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -359,6 +391,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 12
   spawnRange: {x: -10, y: 10}
+--- !u!114 &8524198668353957572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7242473336812343396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8eb8b0963d912346a9f49c71fe14d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 200
 --- !u!1 &7665094966361197049
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7665094966361197049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07385063, y: 0.62164664, z: 0.23577029}
+  m_LocalPosition: {x: -0.07385063, y: 0.966, z: -0.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7242473336812343395}
