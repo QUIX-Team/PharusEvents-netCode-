@@ -20,9 +20,10 @@ public class PlayerCameraFollow : MonoBehaviour
         cinemachineVirtualCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
     }
 
-    public void FollowPlayer(Transform transform)
+    public void FollowPlayer(Transform mTransform)
     {
-        cinemachineVirtualCamera.Follow = transform;
+        cinemachineVirtualCamera.Follow = mTransform;
+       
     }
 
 }

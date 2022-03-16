@@ -246,9 +246,8 @@ GameObject:
   - component: {fileID: 7242473336812343397}
   - component: {fileID: 2221440762783987621}
   - component: {fileID: -5508957885804861905}
-  - component: {fileID: 7242473336812343394}
-  - component: {fileID: 7242473336812343392}
   - component: {fileID: 4116931413108115990}
+  - component: {fileID: -7499812040938845363}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -334,34 +333,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   CanCommitToTransform: 0
---- !u!114 &7242473336812343394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7242473336812343396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2037b056c5d4934ab3461c3c11d639a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementsSpead: 12
-  spawnRange: {x: -10, y: 10}
-  gravity: -20
---- !u!114 &7242473336812343392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7242473336812343396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8eb8b0963d912346a9f49c71fe14d14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 200
 --- !u!114 &4116931413108115990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +345,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccef48d24e3cc346988e8f674cb6999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7499812040938845363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7242473336812343396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a606e468d665a74b9e43e9571e3677f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 12
+  spawnRange: {x: -10, y: 10}
 --- !u!1 &7665094966361197049
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,5 +488,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 8447341743726656208}
-  m_ParameterSendBits: 0
-  m_SendRate: 0.1
