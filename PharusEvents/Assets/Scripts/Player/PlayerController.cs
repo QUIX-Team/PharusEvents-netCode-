@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
 
     NetworkVariable<float> xPosition = new NetworkVariable<float>();
     NetworkVariable<float> zPosition = new NetworkVariable<float>();
+    NetworkVariable<Vector3> FMovements = new NetworkVariable<Vector3>();
 
     NetworkVariable<PlayerState> playerState = new NetworkVariable<PlayerState>();
     private Animator animator;
@@ -68,11 +69,17 @@ public class PlayerController : NetworkBehaviour
 
     private void ClientInput()
     {
-        Vector2 movements = inputManager.GetPlayerMovement();
+        Vector2 input = inputManager.GetPlayerMovement();
 
-        UpdateClientPositionServerRpc(movements);
+        Vector3 move = new Vector3(input.x, 0, input.y);
 
-        if(movements != Vector2.zero)
+        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+        move.y = 0;
+
+
+        UpdateClientPositionServerRpc(move);
+
+        if(input != Vector2.zero)
         {
             UpdatePlayerStateServerRpc(PlayerState.Walk);
 
@@ -85,21 +92,14 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void UpdateClientPositionServerRpc(Vector2 move)
+    private void UpdateClientPositionServerRpc(Vector3 move)
     {
-        xPosition.Value = move.x;
-        zPosition.Value = move.y;
+        FMovements.Value = move;
     }
 
     private void UpdateServer()
     {
-        Vector3 move = new Vector3(xPosition.Value,0,zPosition.Value);
-
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
-        move.y = 0;
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-
+        controller.Move(FMovements.Value * Time.deltaTime * playerSpeed);
 
     }
 
